@@ -12,11 +12,14 @@ namespace itis {
         // Tip 2: есть 2 случая - список пустой и непустой
         // Tip 3: не забудьте обновить поля head и tail
         // напишите свой код здесь ...
-        Node *node = new Node(e, nullptr);
-        if(head_ == nullptr) {
-            *head_ = *node;
+        auto node = new Node(e, nullptr);
+        if (size_ == 0) {
+            head_ = node;
+            tail_ = node;
+        } else {
+            tail_->next = node;
+            tail_ = node;
         }
-        *tail_ = *node;
         size_++;
     }
 
@@ -29,26 +32,27 @@ namespace itis {
         //        (3) добавляем в конец списка
         //        (4) все остальное
 
-       if((index == size_)|(head_ == nullptr)){
-           Add(e);
-       }
-       if(index == 0){
-           Node *node = new Node(e,head_);
-           *head_ = *node;
-       }
-       if((index>0)&(index != size_)){
+        if ((index == size_) | (head_ == nullptr)) {
+            Add(e);
+        }
+        if (index == 0) {
+            Node *node = new Node(e, head_);
+            *head_ = *node;
+            *tail_ = *node;
+        }
+        if ((index > 0) & (index != size_)) {
 
-           int i=0;
-          Node *ptr = head_;
-           while (i != index-1){
-               *ptr = *ptr->next;
-               i++;
-           }
-           Node *node = new Node(e, ptr->next);
-           *ptr->next = *node;
+            int i = 0;
+            Node *ptr = head_;
+            while (i != index - 1) {
+                *ptr = *ptr->next;
+                i++;
+            }
+            Node *node = new Node(e, ptr->next);
+            *ptr->next = *node;
 
-       }
-       size_++;
+        }
+        size_++;
     }
 
     void LinkedList::Set(int index, Element e) {
@@ -64,22 +68,22 @@ namespace itis {
         // Tip 2: используйте функцию find_node(index)
         // напишите свой код здесь ...
         Node *answer = nullptr;
-        if(index == 0){
+        if (index == 0) {
             Node *ptr = head_->next;
             answer = head_;
             head_ = ptr;
         }
-        if(index == size_-1){
+        if (index == size_ - 1) {
             answer = tail_;
-            tail_ = find_node(size_-2);
+            tail_ = find_node(size_ - 2);
         }
 
-        if(index>0 & index<size_-1){
+        if (index > 0 & index < size_ - 1) {
             answer = find_node(index);
-            find_node(index-1)->next = answer->next;
+            find_node(index - 1)->next = answer->next;
         }
         size_--;
-        return answer->data ;
+        return answer->data;
     }
 
     void LinkedList::Clear() {
@@ -103,8 +107,8 @@ namespace itis {
     int LinkedList::IndexOf(Element e) const {
         // напишите свой код здесь ...
         int count = 0;
-        for(Node *ptr = head_; ptr != nullptr; ptr = ptr->next){
-            if(ptr->data == e){
+        for (Node *ptr = head_; ptr != nullptr; ptr = ptr->next) {
+            if (ptr->data == e) {
                 return count;
             }
             count++;
@@ -117,19 +121,20 @@ namespace itis {
         // Tip 1: можете сразу обработать случаи поиска начала и конца списка
         // напишите свой код здесь ...
 
-        if(index == 0){
-         return head_;
+        if (index == 0) {
+            return head_;
         }
-        if(index == size_-1){
-          return tail_;
+        if (index == size_ - 1) {
+            return tail_;
         }
-        int i=0;
-        Node *ptr = head_;
-        while (i != index){
-            *ptr = *ptr->next;
+        int i = 0;
+        for (Node *ptr = head_; ptr != nullptr; ptr = ptr->next) {
+            if (i == index) {
+                return ptr;
+            }
             i++;
         }
-        return ptr;
+        return {};
     }
 
 // РЕАЛИЗОВАНО
