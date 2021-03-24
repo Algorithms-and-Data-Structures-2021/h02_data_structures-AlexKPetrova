@@ -30,16 +30,13 @@ ArrayList::~ArrayList() {
 void ArrayList::Add(Element e) {
   // Tip 1: используйте метод resize(new_capacity) для расширения емкости массива
   // здесь должен быть ваш код ...
-  if(size_<capacity_){
-      size_++;
-      data_[size_] = e;
-  } else{
       resize(capacity_*kCapacityGrowthCoefficient);
       size_++;
       data_[size_] = e;
-  }
-  //assert(size_ < capacity_);  // я здесь, чтобы не дать тебе сойти с правильного пути
-  // напишите свой код после расширения емкости массива здесь ...
+    assert(size_ < capacity_);  // я здесь, чтобы не дать тебе сойти с правильного пути
+    size_++;
+    data_[size_] = e;
+    // напишите свой код после расширения емкости массива здесь ...
 }
 
 void ArrayList::Insert(int index, Element e) {
