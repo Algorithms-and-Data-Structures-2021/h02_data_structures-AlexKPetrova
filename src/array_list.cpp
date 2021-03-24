@@ -29,10 +29,11 @@ ArrayList::~ArrayList() {
 
 void ArrayList::Add(Element e) {
     if (size_ == capacity_) {
-        resize(capacity_ * kCapacityGrowthCoefficient);
+        resize(capacity_ + kCapacityGrowthCoefficient);
     }
     assert(size_ < capacity_);
-    data_[size_++] = e;
+    size_++;
+    data_[size_] = e;
 }
 
 void ArrayList::Insert(int index, Element e) {
@@ -42,7 +43,7 @@ void ArrayList::Insert(int index, Element e) {
     }
 
     if (size_ == capacity_) {
-    resize(capacity_ + 1);
+    resize(capacity_ + kCapacityGrowthCoefficient);
     }
 
   assert(size_ < capacity_);  // я ни в коем случае не дам вам совершить ошибку всей вашей жизни
