@@ -32,8 +32,7 @@ void ArrayList::Add(Element e) {
         resize(capacity_ * kCapacityGrowthCoefficient);
     }
     assert(size_ < capacity_);
-    size_++;
-    data_[size_] = e;
+    data_[size_++] = e;
 }
 
 void ArrayList::Insert(int index, Element e) {
@@ -50,7 +49,7 @@ void ArrayList::Insert(int index, Element e) {
       auto new_data_ =new Element[size_+1];
       std:: copy(data_, data_+index,new_data_);
       new_data_[index] = e;
-      std::copy(data_+index,data_+size_,new_data_);
+      std::copy(data_+index,data_+size_,new_data_+index+1);
       delete[] data_;
       data_ = new_data_;
       size_++;
