@@ -83,15 +83,6 @@ namespace itis {
     }
 
     void LinkedList::Clear() {
-        // Tip 1: люди в черном (MIB) пришли стереть вам память
-        // напишите свой код здесь ...
-       /* while (head_->next != nullptr) {
-        Node *ptr = head_->next;
-        delete head_;
-        head_ = ptr;
-        }
-        size_ = 0;
-        */
 
         for (Node *curr_node = head_; curr_node != nullptr;) {
             Node *delete_node = curr_node;
